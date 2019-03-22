@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Csharp7.Model;
 
 namespace Csharp7
 {
@@ -50,10 +52,72 @@ namespace Csharp7
         public static void Tuples()
         {
             var letters = ("a", "b");
+            Console.WriteLine("Item1:" + letters.Item1);
+            Console.WriteLine("Item2:" + letters.Item2);
             (string alpha, string Beta) namedLetters = letters;
             Console.WriteLine(namedLetters);
+            var alphabetStart = (Beta:"a", alpha:"b");
+            Console.WriteLine(alphabetStart);
+
+            List<int> intList=new List<int>{1,2,3,4,5,6};
+            //析构元组
+            (int max, int min) = Range(intList);
+            Console.WriteLine(max);
+            Console.WriteLine(min);
+
+            var p = new Point(3.14, 2.71);
+            //不会受到 Deconstruct 方法中定义的名称的约束。 可以在分配过程中重命名提取变量
+            (double horizontalDistance, double verticalDistance) = p;
+            Console.WriteLine(horizontalDistance);
+            Console.WriteLine(verticalDistance);
+
+
         }
 
+        private static (int max, int min) Range(IEnumerable<int> numbers)
+        {
+            int max = int.MaxValue;
+            int min = int.MinValue;
+            foreach (var n in numbers)
+            {
+                min = (n > min) ? n : min;
+                max = (n < max) ? n : max;
+            }
+            return (max, min);
+        }
+
+        #region 命名元组和未命名元组
+
+        #endregion
+
+        #region 元组投影初始值设定项
+
+        #endregion
+
+        #region 相等和元组
+
+
+
+        #endregion
+
+        #region 赋值和元组
+
+
+
+        #endregion
+
+        #region 作为方法返回值的元组
+
+
+
+        #endregion
+
+        #region 析构
+
+
+
+
+        #endregion
         #endregion
 
         #region 弃元
