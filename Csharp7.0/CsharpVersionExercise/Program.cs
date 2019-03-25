@@ -88,6 +88,13 @@ namespace Csharp7
 
         #region 命名元组和未命名元组
 
+        public static void NameandUnName ()
+        {
+            //未命名元祖
+            var unnamed = ("one", "two");
+            //命名元祖
+            var name = (first:"one", second:"two");
+        }
         #endregion
 
         #region 元组投影初始值设定项
