@@ -99,16 +99,45 @@ namespace Csharp7
 
         #region 元组投影初始值设定项
 
+        public static void TuplesProjectionInitializers()
+        {
+            //元组投影初始值设定项使用元组初始化语句右侧的变量或字段名称。 如果未提供显式名称，上述名称将优先于任何投影的名称。
+            var localVariableOne = 5;
+            var localVariableTwo = "some text";
+            var tuple = (explicitFieldOne:localVariableOne, explicitFieldTwo:localVariableTwo);
+            Console.WriteLine(tuple.explicitFieldOne);
+            Console.WriteLine(tuple.explicitFieldTwo);
+
+            var stringContent = "元祖投影";
+            var mixedTuple = (42, stringContent);
+            Console.WriteLine(mixedTuple.Item1);
+            Console.WriteLine(mixedTuple.Item2);
+            //在以下两种情况下，不会将候选字段名称投影到元组字段：
+            //候选名称是保留元组名称时。 示例包括 Item3、ToString、 或 Rest。
+            //候选名称重复了另一元组的显式或隐式字段名称时。
+            //TODO：推断需要用7.1所以在7.1中演示
+        }
+
+
         #endregion
 
         #region 相等和元组
+        //从 C# 7.3 开始，元组类型支持 == 和 != 运算符。 这些运算符按顺序将左边参数的每个成员与右边参数的每个成员进行比较。 这些比较将发生短路。 只要有一对不相等，它们即会停止计算成员。 以下代码示例使用 ==，但比较规则均适用于 !=
 
-
-
+        //TODO：元祖相等需要用7.3所以在7.3中演示
         #endregion
 
         #region 赋值和元组
 
+        public static void AssignmentAndTuples()
+        {
+            var unnamed = (42, "字符串");
+            var anonymous = (16, "字符串2");
+            var named = (Answer:42, Message:"字符串3");
+            var differentNamed = (SercretConstant:42, Label:"字符串4");
+
+
+        }
 
 
         #endregion
