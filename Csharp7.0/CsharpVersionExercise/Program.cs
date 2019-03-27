@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Csharp7.Model;
 
 namespace Csharp7
@@ -13,7 +14,39 @@ namespace Csharp7
             #endregion
 
             #region 元组
-            Tuples();
+            //Tuples();
+
+            #region 赋值和元组
+            //AssignmentAndTuples();
+            #endregion
+
+            #region 作为方法返回值的元组
+
+            //ComputeSumAndSumOfSquares(new List<double> {1.1, 2.2, 3.3, 4.4});
+
+
+            #endregion
+
+            #region 析构
+            //Deconstruction();
+            #endregion
+
+            #endregion
+
+            #region 弃元
+            //Discards();
+            #endregion
+
+            #region 模式匹配
+
+            #region Is表达式
+
+            IsExpression();
+
+
+            #endregion
+
+
             #endregion
         }
 
@@ -135,8 +168,17 @@ namespace Csharp7
             var anonymous = (16, "字符串2");
             var named = (Answer:42, Message:"字符串3");
             var differentNamed = (SercretConstant:42, Label:"字符串4");
+            unnamed = named;
+            named = unnamed;
+            Console.WriteLine($"{named.Answer},{named.Message}");
+            anonymous = unnamed;
+            named = differentNamed;
+            Console.WriteLine($"{named.Answer},{named.Message}");
 
-
+            (long, string) conversion = named;
+            Console.WriteLine(conversion);
+            //元组的名称未赋值，元素的赋值顺序遵循元素在元组中的顺序
+            //元素类型或数量不同的元组不可赋值
         }
 
 
@@ -144,12 +186,31 @@ namespace Csharp7
 
         #region 作为方法返回值的元组
 
-
-
+        public static (double, double, int) ComputeSumAndSumOfSquares(IEnumerable<double> sequence)
+        {
+            double sum = 0;
+            double sumOfSquares = 0;
+            int count = 0;
+            foreach (var item in sequence)
+            {
+                count++;
+                sum += item;
+                sumOfSquares += item * item;
+            }
+            Console.WriteLine((sum, sumOfSquares, count));
+            return (sum, sumOfSquares, count);
+        }
         #endregion
 
         #region 析构
-
+        //通过对方法返回的元组进行析构，可以解封元组中的所有项。
+        public static void Deconstruction()
+        {
+            (double sum, var sumOfSquares, var count) = ComputeSumAndSumOfSquares(new List<double>{2.2, 3.4, 5.6});
+            Console.WriteLine(sum);
+            Console.WriteLine(sumOfSquares);
+            Console.WriteLine(count);
+        }
 
 
 
@@ -158,12 +219,64 @@ namespace Csharp7
 
         #region 弃元
         //弃元是指在不关心所赋予的值时，赋值中使用的临时只写变量。 在对元组和用户定义类型进行解构，以及在使用 out 参数调用方法时，它们特别有用。
+        public static void Discards()
+        {
+            var(_, _, _, pop1, _, pop2) = QueryCityDataForYears("武汉", 1960, 2010);
+            Console.WriteLine($"人口变化{pop2-pop1:N0}");
+        }
+        private static (string, double, int, int, int, int) QueryCityDataForYears(string name, int year1, int year2)
+        {
+            int population1 = 0, population2 = 0;
+            double area = 0;
+            if (name=="武汉")
+            {
+                area = 468.48;
+                if (year1==1960)
+                {
+                    population1 = 77777777;
+                }
+                if (year2==2010)
+                {
+                    population2 = 88888888;
+                }
+                return (name, area, year1, population1, year2, population2);
+            }
+            return ("", 0, 0, 0, 0, 0);
 
+        }
 
         #endregion
 
         #region 模式匹配
         //可以基于任意类型和这些类型的成员的值创建分支逻辑。
+
+        #region is表达式
+        // 你可以在检查类型过程中编写变量初始化。 这将创建一个经过验证的运行时类型的新变量。
+
+        public static void IsExpression()
+        {
+            Console.WriteLine(DiceSum(new List<int>{1,2,3,4,5}));
+            Console.WriteLine(DiceSum2(new List<object>{1,2,3,4,5,new List<object> {1,2,3,4,5}}));
+        }
+
+        private static int DiceSum(IEnumerable<int> values)
+        {
+            return values.Sum();
+        }
+
+        private static int DiceSum2(IEnumerable<object> values)
+        {
+            var sum = 0;
+            foreach (var item in values)
+            {
+                if (item is int val) sum += val;
+                else if (item is IEnumerable<object> subList) sum += DiceSum2(subList);
+            }
+            return sum;
+        }
+        
+
+        #endregion
 
         #endregion
 
