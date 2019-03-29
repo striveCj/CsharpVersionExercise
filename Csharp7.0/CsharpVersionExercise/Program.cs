@@ -274,9 +274,45 @@ namespace Csharp7
             }
             return sum;
         }
+
+
+        #endregion
+
+        #region switch语句更新
+
+        public static int SwitchStatementUpdates(IEnumerable<object> values)
+        {
+            var sum = 0;
+            foreach (var item in values)
+            {
+                switch (item)
+                {
+                    case 0://常量模式匹配
+                        break;
+                    case short sval://类型模式匹配
+                        sum += sval;
+                        break;
+                    case int ival://类型模式匹配
+                        sum += ival;
+                        break;
+                    case string str when int.TryParse(str, out var result)://类型模式匹配+条件表达式
+                        sum += result;
+                        break;
+                    case IEnumerable<object> subList when subList.Any():
+                        sum += SwitchStatementUpdates(subList);
+                        break;
+                        default:
+                        throw new InvalidOperationException("未知的类型");
+
+                }
+            }
+            Console.WriteLine(sum);
+            return sum;
+        }
         
 
         #endregion
+                
 
         #endregion
 
