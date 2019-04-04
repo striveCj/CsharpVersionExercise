@@ -309,17 +309,24 @@ namespace Csharp7
             Console.WriteLine(sum);
             return sum;
         }
-        
+
 
         #endregion
-                
+
 
         #endregion
 
         #region ref 局部变量和返回结果
         //方法局部参数和返回值可以是对其他存储的引用。
 
-
+        public static ref int Find(int[,] matrix, Func<int, bool> predicate)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            for (int j = 0; j < matrix.GetLength(1); j++)
+                if (predicate(matrix[i, j]))
+                    return ref matrix[i, j];
+            throw new InvalidOperationException("Not found");
+        }
         #endregion
 
         #region 本地函数
