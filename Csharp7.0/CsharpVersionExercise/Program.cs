@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Csharp7.Model;
 
 namespace Csharp7
@@ -40,13 +41,28 @@ namespace Csharp7
             #region 模式匹配
 
             #region Is表达式
+            //IsExpression();
+            #endregion
+            #region switch语句更新
 
-            IsExpression();
+            //SwitchStatementUpdates(new List<object>
+            //{
+            //    1,
+            //    "1",
+            //    new List<object>()
+            //    {
+            //        2,
+            //        "2"
+            //    }
+            //});
 
 
             #endregion
 
+            #endregion
 
+            #region ref 局部变量和返回结果
+            RefUse();
             #endregion
         }
 
@@ -279,7 +295,10 @@ namespace Csharp7
         #endregion
 
         #region switch语句更新
-
+        //switch 表达式的控制类型不再局限于整数类型、Enum 类型、string 或与这些类型之一对应的可为 null 的类型。 可能会使用任何类型。
+        //可以在每个 case 标签中测试 switch 表达式的类型。 与 is 表达式一样，可以为该类型指定一个新变量。
+        //可以添加 when 子句以进一步测试该变量的条件。
+        // case 标签的顺序现在很重要。 执行匹配的第一个分支；其他将跳过。
         public static int SwitchStatementUpdates(IEnumerable<object> values)
         {
             var sum = 0;
@@ -326,6 +345,23 @@ namespace Csharp7
                 if (predicate(matrix[i, j]))
                     return ref matrix[i, j];
             throw new InvalidOperationException("Not found");
+        }
+
+        public static void RefUse()
+        {
+            var bc=new BookCollection();
+            bc.ListBooks();
+
+            ref var book = ref bc.GetBookByTitle("Call of the wild, The");
+            if (book!=null)
+            {
+                book=new Book
+                {
+                    Title = "Republic, The",
+                    Author="Plato"
+                };
+            }
+            bc.ListBooks();
         }
         #endregion
 
