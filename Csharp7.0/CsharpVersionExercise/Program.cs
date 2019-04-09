@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Csharp7.Model;
 
 namespace Csharp7
@@ -367,8 +368,48 @@ namespace Csharp7
 
         #region 本地函数
         //可以将函数嵌套在其他函数内，以限制其范围和可见性。
+        public static IEnumerable<char> AlphabetSubset3(char start, char end)
+        {
+            if (start<'a'||start>'z')
+            {
+                throw new ArgumentOutOfRangeException(paramName:nameof(start),message: "start must be a letter");
+            }
+            if (end < 'a' || end > 'z')
+            {
+                throw new ArgumentOutOfRangeException(paramName: nameof(end), message: "end must be a letter");
+            }
+            if (end<=start)
+            {
+                throw new ArgumentException($"{nameof(end)}must be greater than {nameof(start)}");
+            }
+            return AlphabetSubsetImplementation();
+            IEnumerable<char> AlphabetSubsetImplementation()
+            {
+                for (var c = start; c < end; c++)
+                    yield return c;
+            }
+        }
 
+        //public Task<string> PerformLongRunningWork(string address, int index, string name)
+        //{
+        //    if(string.IsNullOrWhiteSpace(address))
+        //        throw new ArgumentException(message:"An Address is required",paramName:nameof(address));
+        //    if (index<0)
+        //    {
+        //        throw  new ArgumentOutOfRangeException(paramName:nameof(index),message:"索引必须是非负数");
+        //    }
+        //    if (string.IsNullOrEmpty(name))
+        //    {
+        //        throw new ArgumentException(message:"你必须提供name",paramName:nameof(name));
+        //    }
 
+        //    async Task<string> LongRunningWorkImplementation()
+        //    {
+        //        //var interimResult = await FirstWork(address);
+        //        //var secondResult = await SecondStep(index,name);
+        //        return $"{1},{2}";
+        //    }
+        //}
         #endregion
 
         #region 更多的 expression-bodied 成员
