@@ -415,23 +415,52 @@ namespace Csharp7
         #region 更多的 expression-bodied 成员
         //可使用表达式创作的成员列表有所增长。
 
+        private string label;
+
+        public string Label
+        {
+            get => label;
+            set => this.label = value ?? "Default label";
+        }
 
         #endregion
 
         #region throw 表达式
+
         //可以在之前因为 throw 是语句而不被允许的代码构造中引发异常。
 
+        private string _name = GetName() ?? throw new ArgumentNullException(nameof(GetName));
+
+        private int _age;
+
+        public int Age
+        {
+            get => _age;
+            set => _age = value <= 0 || value >= 130 ? throw new ArgumentException("参数不合法") : value;
+        }
+
+        public static string GetName() => null;
 
         #endregion
 
         #region 通用的异步返回类型
+
         //使用 async 修饰符声明的方法可以返回除 Task 和 Task<T> 以外的其他类型。
 
-
+        public async ValueTask<int> Func()
+        {
+            await Task.Delay(100);
+            return 5;
+        }
         #endregion
 
         #region 数字文本语法改进
-        //新令牌可提高数值常量的可读性。
+
+        //误读的数值常量可能使第一次阅读代码时更难理解。 位掩码或其他符号值容易产生误解。 C# 7.0 包括两项新功能，可用于以最可读的方式写入数字来用于预期用途：二进制文本和数字分隔符。
+        //在创建位掩码时，或每当数字的二进制表示形式使代码最具可读性时，以二进制形式写入该数字：
+        public const int Sixteen = 0b001_0000;
+
+        public const long BillionsAndBillions = 100_000_000_000;
 
 
         #endregion
