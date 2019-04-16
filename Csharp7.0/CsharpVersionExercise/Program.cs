@@ -13,7 +13,7 @@ namespace Csharp7
         {
             #region out变量
             //OutVariables();
-            #endregion
+            #endregion 
 
             #region 元组
             //Tuples();
