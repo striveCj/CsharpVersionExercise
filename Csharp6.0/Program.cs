@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Csharp6._0.Model;
 
 namespace Csharp6._0
 {
@@ -10,21 +11,32 @@ namespace Csharp6._0
     {
         static void Main(string[] args)
         {
+            #region 只读自动属性
+            //Test1();
+            #endregion
         }
 
         #region 只读自动属性
-        public string FirstName { get; }
-        public string LastName { get; }
+
         #endregion
         #region 自动属性初始化表达式
 
-
-
+        public static void Test1()
+        {
+            Student student=new Student("chen","jie");
+            student.Grades.Add(1);
+            student.Grades.Add(2);
+            Console.WriteLine(student.FirstName);
+            Console.WriteLine(student.LastName);
+            Console.WriteLine(student.Address);
+            Console.WriteLine(student.Grades.Count);
+        }
         #endregion
         #region Expression-bodied函数成员
-
-
-
+        public static void Test2()
+        {
+            
+        }
         #endregion
         #region using static
 
