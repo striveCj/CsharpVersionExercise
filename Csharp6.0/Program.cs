@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 using Csharp6._0.Model;
 
 namespace Csharp6._0
@@ -11,16 +12,19 @@ namespace Csharp6._0
     {
         static void Main(string[] args)
         {
-            #region 只读自动属性
+            #region 只读自动属性、自动属性初始化表达式
             //Test1();
             #endregion
+            #region Expression-bodied函数成员
+            //Test2();
+            #endregion
+            #region using static
+            Test3();
+            #endregion 
+
         }
 
-        #region 只读自动属性
-
-        #endregion
-        #region 自动属性初始化表达式
-
+        #region 只读自动属性、自动属性初始化表达式
         public static void Test1()
         {
             Student student=new Student("chen","jie");
@@ -35,13 +39,16 @@ namespace Csharp6._0
         #region Expression-bodied函数成员
         public static void Test2()
         {
-            
+            Student s=new Student("陈","莫");        
+            Console.WriteLine(s.ToString());
+            Console.WriteLine(s.FullName);
         }
         #endregion
         #region using static
-
-
-
+        public static void Test3()
+        {
+            WriteLine("using static");
+        }
         #endregion
         #region Null条件运算符
 
