@@ -18,7 +18,8 @@ namespace Csharp6._0.Model
         //编写 expression-bodied 成员
         public string FullName=> $"{LastName},{FirstName}";
         public override string ToString() => $"{LastName},{FirstName}";
-
+        //字符串插值
+        public  string GetGradePointPercentage() => $"Name:{LastName},{FirstName}. GPA:{100:F2}";
 
         //为属性赋值，只读自动属性，只能在构造函数中设置值
 
@@ -30,6 +31,7 @@ namespace Csharp6._0.Model
                 throw new ArgumentException(message: "空白", paramName: nameof(firstName));
             FirstName = firstName;
             LastName = lastName;
+            Address = null;
         }
 
 

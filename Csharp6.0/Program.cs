@@ -15,12 +15,24 @@ namespace Csharp6._0
             #region 只读自动属性、自动属性初始化表达式
             //Test1();
             #endregion
+
             #region Expression-bodied函数成员
             //Test2();
             #endregion
+
             #region using static
-            Test3();
-            #endregion 
+            //Test3();
+            #endregion
+
+            #region null条件运算符
+            //Test4();
+            #endregion
+
+            #region 字符串内插
+
+            Test5();
+
+            #endregion
 
         }
 
@@ -51,13 +63,21 @@ namespace Csharp6._0
         }
         #endregion
         #region Null条件运算符
-
-
-
+        public static void Test4()
+        {
+            var student=new Student("f","l");
+            var first = student?.Address;
+            first = student?.Address ?? "U";
+            WriteLine(first);
+        }
         #endregion
         #region 字符串内插
 
-
+        public static void Test5()
+        {
+          var student = new Student("c","j");
+          WriteLine(student.GetGradePointPercentage());
+        }
 
         #endregion
         #region 异常筛选器
